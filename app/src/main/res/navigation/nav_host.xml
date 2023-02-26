@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_host"
+    app:startDestination="@id/gameSettingsFragment">
+
+    <fragment
+        android:id="@+id/gameSettingsFragment"
+        android:name="com.candroid.catchmeifyoucan.GameSettingsFragment"
+        android:label="fragment_game_settings"
+        tools:layout="@layout/fragment_game_settings" >
+        <action
+            android:id="@+id/action_gameSettingsFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameFragment"
+        android:name="com.candroid.catchmeifyoucan.GameFragment"
+        android:label="fragment_game"
+        tools:layout="@layout/fragment_game" >
+        <argument
+            android:name="GameSettings"
+            app:argType="com.candroid.catchmeifyoucan.GameSettings" />
+        <action
+            android:id="@+id/action_gameFragment_to_gameSettingsFragment"
+            app:destination="@id/gameSettingsFragment" />
+    </fragment>
+</navigation>
