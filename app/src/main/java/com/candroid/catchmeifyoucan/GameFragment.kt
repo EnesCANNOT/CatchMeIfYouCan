@@ -23,7 +23,7 @@ class GameFragment : Fragment() {
     private var ivArr: ArrayList<ImageView> = ArrayList()
     private var difficulty = 700
     private var time: Long = 15
-
+    private var resId = R.drawable.android_4
     private var iv9: ArrayList<ImageView> = ArrayList()
     private var iv16: ArrayList<ImageView> = ArrayList()
     private var iv25: ArrayList<ImageView> = ArrayList()
@@ -43,6 +43,8 @@ class GameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         when(gameSettings.layout){
             "3 x 3" -> createLayoutAs3x3()
             "4 x 4" -> createLayoutAs4x4()
@@ -52,8 +54,10 @@ class GameFragment : Fragment() {
 
         difficulty = when (gameSettings.difficulty){
             "Low" -> 700
+            "Easy" -> 600
             "Medium" -> 500
-            "High" -> 300
+            "Hard" -> 400
+            "Very Hard" -> 300
             else -> 700
         }
 
@@ -71,8 +75,6 @@ class GameFragment : Fragment() {
                 alert.setTitle("Game Over")
                 alert.setMessage("Restart The Game?")
                 alert.setPositiveButton("Yes") {dialog, which ->
-                    //Restart
-                    //Navigation.findNavController(requireView()).navigate(R.id.gameFragment)
                     Navigation.findNavController(requireView()).navigate(R.id.action_gameFragment_to_gameSettingsFragment)
                 }
 
@@ -89,8 +91,10 @@ class GameFragment : Fragment() {
         }.start()
     }
 
-    private fun setGridLayouts(){
-        binding.grid3x3.visibility = View.INVISIBLE
+    private fun setImageResource(resId: Int, ivArr: ArrayList<ImageView>){
+        for (iv in ivArr){
+            iv.setImageResource(resId)
+        }
     }
 
     private fun createLayoutAs3x3(){
@@ -107,6 +111,7 @@ class GameFragment : Fragment() {
         iv9.add(binding.iv99)
 
         ivArr = iv9
+        setImageResource(resId, ivArr)
         hideImages(ivArr)
     }
 
@@ -131,11 +136,42 @@ class GameFragment : Fragment() {
         iv16.add(binding.iv1616)
 
         ivArr = iv16
+        setImageResource(resId, ivArr)
         hideImages(ivArr)
     }
 
     private fun createLayoutAs5x5(){
+        binding.grid5x5.visibility = View.VISIBLE
 
+        iv25.add(binding.iv251)
+        iv25.add(binding.iv252)
+        iv25.add(binding.iv253)
+        iv25.add(binding.iv254)
+        iv25.add(binding.iv255)
+        iv25.add(binding.iv256)
+        iv25.add(binding.iv257)
+        iv25.add(binding.iv258)
+        iv25.add(binding.iv259)
+        iv25.add(binding.iv2510)
+        iv25.add(binding.iv2511)
+        iv25.add(binding.iv2512)
+        iv25.add(binding.iv2513)
+        iv25.add(binding.iv2514)
+        iv25.add(binding.iv2515)
+        iv25.add(binding.iv2516)
+        iv25.add(binding.iv2517)
+        iv25.add(binding.iv2518)
+        iv25.add(binding.iv2519)
+        iv25.add(binding.iv2520)
+        iv25.add(binding.iv2521)
+        iv25.add(binding.iv2522)
+        iv25.add(binding.iv2523)
+        iv25.add(binding.iv2524)
+        iv25.add(binding.iv2525)
+
+        ivArr = iv25
+        setImageResource(resId, ivArr)
+        hideImages(ivArr)
     }
 
     private fun hideImages(ivArr: ArrayList<ImageView>){
@@ -146,7 +182,7 @@ class GameFragment : Fragment() {
                 }
 
                 val random = Random()
-                val randomIndex = random.nextInt(9)
+                val randomIndex = random.nextInt(ivArr.size)
                 ivArr[randomIndex].visibility = View.VISIBLE
                 ivArr[randomIndex].setOnClickListener {
                     counter++
