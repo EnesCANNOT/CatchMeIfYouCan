@@ -8,15 +8,19 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.SeekBar
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import com.candroid.catchmeifyoucan.databinding.FragmentGameSettingsBinding
 import com.google.android.material.snackbar.Snackbar
 
 class GameSettingsFragment : Fragment(){
 
     private lateinit var binding: FragmentGameSettingsBinding
+    private var resId: Int? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentGameSettingsBinding.inflate(inflater, container, false)
+        val bundle: GameSettingsFragmentArgs by navArgs()
+        resId = bundle.resId.toInt()
         binding.time.text = ((binding.seekBarTime.progress+1)*15).toString()
         return binding.root
     }
@@ -54,7 +58,7 @@ class GameSettingsFragment : Fragment(){
 
         val time = binding.time.text?.toString()
 
-        val gameSettings = GameSettings(difficulty, layout, time)
+        val gameSettings = GameSettings(difficulty, layout, time, resId)
 
 
         if (difficulty == null){
